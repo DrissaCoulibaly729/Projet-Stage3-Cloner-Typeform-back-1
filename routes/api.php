@@ -6,6 +6,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResponseController;
 
+Route::middleware('cors')->group(function () {
 Route::prefix('v1')->group(function () {
     // Routes pour User
     Route::get('users', [UserController::class, 'getAllUsers']);
@@ -40,4 +41,5 @@ Route::prefix('v1')->group(function () {
 Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
 });
