@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResponseController;
 
@@ -33,4 +34,10 @@ Route::prefix('v1')->group(function () {
     Route::post('responses', [ResponseController::class, 'createResponse']);
     Route::put('responses/{id}', [ResponseController::class, 'updateResponse']);
     Route::delete('responses/{id}', [ResponseController::class, 'deleteResponse']);
+});
+
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 });
